@@ -1,5 +1,6 @@
 import 'package:demo/Edituserprofile.dart';
 import 'package:demo/HomePage.dart';
+import 'package:demo/receipes/favoriterecipes.dart';
 import 'package:demo/receipes/receipeform.dart';
 import 'package:demo/receipes/useruploadedreceipes.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,7 +46,7 @@ class _navbarState extends State<navbar> {
               onClicked: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => HomePage("${widget.UserId}"))),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             buildMenuItem(
               text: 'User Profile',
               icon: Icons.person,
@@ -53,14 +54,22 @@ class _navbarState extends State<navbar> {
           builder: (context) => edituserprofile("${widget.UserId}"))),
             ),
             
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
+            buildMenuItem(
+              text: 'Favorite Recipes',
+              icon: Icons.favorite,
+              onClicked: () => Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => Favorites("${widget.UserId}"))),
+            ),
+
+            const SizedBox(height: 10),
             buildMenuItem(
               text: 'Upload New Receipes',
               icon: Icons.food_bank_rounded,
               onClicked: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => receipeform("${widget.UserId}"))),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             buildMenuItem(
               text: 'User Uploaded Receipes',
               icon: Icons.receipt_long_rounded,
@@ -68,7 +77,7 @@ class _navbarState extends State<navbar> {
           builder: (context) => useruploadedreceipes("${widget.UserId}"))),
             ),
             
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Divider(color: Colors.white),
           ],
         ),

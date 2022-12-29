@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/receipes/receipeform.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -9,22 +8,22 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../login_page.dart';
 import '../navbar.dart';
-import '../search.dart';
 import '../userreceipedetail.dart';
 
-class useruploadedreceipes extends StatefulWidget {
+class Favorites extends StatefulWidget {
   String userId;
-  useruploadedreceipes(this.userId);
-  // const useruploadedreceipes({Key? key}) : super(key: key);
+  // const Favorites({Key? key}) : super(key: key);
+  Favorites(this.userId, {Key? key}) : super(key: key);
 
   @override
-  State<useruploadedreceipes> createState() => _useruploadedreceipesState();
+  State<Favorites> createState() => _FavoritesState();
 }
 
-class _useruploadedreceipesState extends State<useruploadedreceipes> {
+
+
+class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
-    // QueryDocumentSnapshot querysnapshot = FirebaseFirestore().collection('userreceipes').get();
     return Scaffold(
       /*Implements the basic Material Design visual layout structure.This class provides APIs for showing drawers and bottom sheets.*/
       drawer: navbar(
@@ -80,11 +79,24 @@ class _useruploadedreceipesState extends State<useruploadedreceipes> {
           (the main scrolling direction as well as the cross axis), as one might see in a dialog or pop-up menu.*/
           child: Column(
             children: [
-              StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('userreceipes')
-                      .where('email', isEqualTo: "${widget.userId}")
-                      .snapshots(),
+              FutureBuilder(
+                  future: FirebaseFirestore.instance
+                      .collection('user favorite recipes')
+                      .doc("${widget.userId}")
+                      .collection("recipe names")
+                      .get()
+                      .then((QuerySnapshot value) {
+                    value.docs.forEach((element) {
+                      FirebaseFirestore.instance
+                          .collection("userreceipes")
+                          .where('Receipe Name',
+                              isEqualTo: element["receipe name"]).get().then((value) {
+                                value.docs.forEach((element) {
+                                
+                                });
+                              });
+                    });
+                  }).snapshots(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(

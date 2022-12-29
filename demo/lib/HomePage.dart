@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
 
   getreceipe(String query) async {
     String url =
-        "https://api.edamam.com/search?q=$query&app_id=cac09239&app_key=2a0165b7a3909e97cc9cecf161d66653";//Fetching recipes from API
+        "https://api.edamam.com/search?q=$query&app_id=cac09239&app_key=2a0165b7a3909e97cc9cecf161d66653"; //Fetching recipes from API
     http.Response response = await http.get(Uri.parse(url));
     Map data = jsonDecode(response.body);
 
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
-    
+
     super.initState();
     getreceipe("LADOO");
   }
@@ -87,9 +87,12 @@ class _HomePageState extends State<HomePage> {
     /*A controller for an editable text field.Whenever the user modifies a text field with an associated TextEditingController, the text field updates value and the controller notifies its listeners. Listeners can then read the text and selection properties to learn what the user has typed or how the selection has been updated */
     TextEditingController searchController = TextEditingController();
 
-    return Scaffold(/*Implements the basic Material Design visual layout structure.This class provides APIs for showing drawers and bottom sheets.*/
-      drawer: navbar("${widget.userId}"),//A Material Design panel that slides in horizontally from the edge of a Scaffold to show navigation links in an application.
-      appBar: AppBar(//App bars are typically used in the Scaffold.appBar property, which places the app bar as a fixed-height widget at the top of the screen.
+    return Scaffold(
+      /*Implements the basic Material Design visual layout structure.This class provides APIs for showing drawers and bottom sheets.*/
+      drawer: navbar(
+          "${widget.userId}"), //A Material Design panel that slides in horizontally from the edge of a Scaffold to show navigation links in an application.
+      appBar: AppBar(
+        //App bars are typically used in the Scaffold.appBar property, which places the app bar as a fixed-height widget at the top of the screen.
         title: Text(
           "Kitchen Diaries",
           style: GoogleFonts.balooPaaji2(
@@ -104,9 +107,11 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(//Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
+              Navigator.push(
+                //Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
                 context,
-                MaterialPageRoute(//MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
+                MaterialPageRoute(
+                  //MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
                   builder: (context) => receipeform(userId),
                 ),
               );
@@ -115,9 +120,11 @@ class _HomePageState extends State<HomePage> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(//Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
+              Navigator.push(
+                //Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
                 context,
-                MaterialPageRoute(//MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
+                MaterialPageRoute(
+                  //MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
                   builder: (context) => const LoginPage(),
                 ),
               );
@@ -127,7 +134,8 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(/*SingleChildScrollView - A box in which a single widget can be scrolled.
+        child: SingleChildScrollView(
+          /*SingleChildScrollView - A box in which a single widget can be scrolled.
         This widget is useful when you have a single box that will normally be entirely visible,
          but you need to make sure it can be scrolled if the container gets too small in one axis
          (the scroll direction).It is also useful if you need to shrink-wrap in both axes
@@ -144,16 +152,19 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: Row(
                   children: [
-                    GestureDetector(/*By default a GestureDetector with an invisible child ignores touches; this behavior can be controlled with behavior. Detects various gestures and events using the supplied MotionEvents. The OnGestureListener callback will notify users when a particular motion event has occurred.*/
+                    GestureDetector(
+                        /*By default a GestureDetector with an invisible child ignores touches; this behavior can be controlled with behavior. Detects various gestures and events using the supplied MotionEvents. The OnGestureListener callback will notify users when a particular motion event has occurred.*/
                         onTap: () {
                           if ((searchController.text).replaceAll(" ", "") ==
                               "") {
                             print("Blank search");
                           } else {
                             // getreceipe(searchController.text);
-                            Navigator.push(//Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
+                            Navigator.push(
+                                //Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
                                 context,
-                                MaterialPageRoute(//MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
+                                MaterialPageRoute(
+                                  //MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
                                   builder: (context) => search(
                                       searchController.text,
                                       "${widget.userId}"),
@@ -236,105 +247,140 @@ class _HomePageState extends State<HomePage> {
                                   QueryDocumentSnapshot x =
                                       snapshot.data!.docs[index];
 
-                                  return InkWell(
-                                    onTap: () {
-                                      Navigator.push(//Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
-                                          context,
-                                          MaterialPageRoute(//MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
-                                            builder: (context) => details(
-                                                "${widget.userId}",
-                                                x["Receipe Name"],
-                                                false),
-                                          ));
-                                    },
-                                    child: Card(
-                                        margin: const EdgeInsets.all(20),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        elevation: 0.0,
-                                        child: Stack(
-                                          children: [
-                                            ClipRRect(/*A widget that clips its child using a rounded rectangle.
-                                     By default, ClipRRect uses its own bounds as the base rectangle for the clip, but the size and location of the clip can be customized using a custom clipper.*/
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              child: Image.network(
-                                                x['Receipe Image'],
-                                                height: 300,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover,
+                                  return Material(
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            //Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
+                                            context,
+                                            MaterialPageRoute(
+                                              //MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
+                                              builder: (context) => details(
+                                                  "${widget.userId}",
+                                                  x["Receipe Name"],
+                                                  false),
+                                            ));
+                                      },
+                                      child: Card(
+                                          margin: const EdgeInsets.all(20),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          elevation: 10.0,
+                                          child: Stack(
+                                            children: [
+                                              ClipRRect(
+                                                /*A widget that clips its child using a rounded rectangle.
+                                       By default, ClipRRect uses its own bounds as the base rectangle for the clip, but the size and location of the clip can be customized using a custom clipper.*/
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image.network(
+                                                  x['Receipe Image'],
+                                                  height: 300,
+                                                  width: double.infinity,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
-                                            ),
-                                            Positioned(
-                                              right: 0,
-                                              left: 0,
-                                              bottom: 0,
-                                              child: Container(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
+                                              Positioned(
+                                                right: 0,
+                                                left: 0,
+                                                bottom: 0,
+                                                child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      color: Colors.black26,
+                                                    ),
+                                                    child: Text(
+                                                      snapshot.data!.docs[index]
+                                                          ['Receipe Name'],
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20,
+                                                      ),
+                                                    )),
+                                              ),
+                                              Positioned(
+                                                right: 0,
+                                                height: 30,
+                                                width: 80,
+                                                child: Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    color: Colors.black26,
+                                                    color: const Color.fromARGB(
+                                                        255, 255, 255, 255),
                                                   ),
-                                                  child: Text(
-                                                    snapshot.data!.docs[index]
-                                                        ['Receipe Name'],
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 20,
-                                                    ),
-                                                  )),
-                                            ),
-                                            Positioned(
-                                              right: 0,
-                                              height: 30,
-                                              width: 80,
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: const Color.fromARGB(
-                                                      255, 255, 255, 255),
-                                                ),
-                                                child: Center(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      const Icon(
-                                                          Icons
-                                                              .local_fire_department,
-                                                          size: 20),
-                                                      Text(
-                                                        snapshot
-                                                            .data!
-                                                            .docs[index][
-                                                                'Receipe Calories']
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 0, 0, 0),
+                                                  child: Center(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        const Icon(
+                                                            Icons
+                                                                .local_fire_department,
+                                                            size: 20),
+                                                        Text(
+                                                          snapshot
+                                                              .data!
+                                                              .docs[index][
+                                                                  'Receipe Calories']
+                                                              .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    0,
+                                                                    0,
+                                                                    0),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            )
-                                          ],
-                                        )),
+                                              Positioned(
+                                                  left: 0,
+                                                  top: 0,
+                                                  height: 30,
+                                                  width: 30,
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      // color: Colors.white,
+                                                    ),
+                                                    child: Center(
+                                                      child: IconButton(
+                                                        icon: const Icon(
+                                                            Icons.favorite),
+                                                        onPressed: () {
+                                                          addtofav(snapshot.data!.docs[index]['Receipe Name']);
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ))
+                                            ],
+                                          )),
+                                    ),
                                   );
                                 },
                               ),
                             );
                           }
                         }),
-                    Container( //A convenience widget that combines common painting, positioning, and sizing widgets.
+                    Container(
+                      //A convenience widget that combines common painting, positioning, and sizing widgets.
                       child: isLoading
                           ? const CircularProgressIndicator()
                           : ListView.builder(
@@ -347,9 +393,11 @@ class _HomePageState extends State<HomePage> {
                                   //   borderRadius: BorderRadius.circular(20),
                                   // ),
                                   onTap: () {
-                                    Navigator.push(//Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
+                                    Navigator.push(
+                                        //Navigator helps us navigate to new route. Navigator.push() method is used to switch to a new route.
                                         context,
-                                        MaterialPageRoute(//MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
+                                        MaterialPageRoute(
+                                          //MaterialPageRoute - A modal route that replaces the entire screen with a platform-adaptive transition. By default, when a modal route is replaced by another, the previous route remains in memory.
                                           builder: (context) =>
                                               receipeview(receipes[index].url),
                                         ));
@@ -362,7 +410,8 @@ class _HomePageState extends State<HomePage> {
                                     elevation: 0.0,
                                     child: Stack(
                                       children: [
-                                        ClipRRect(/*A widget that clips its child using a rounded rectangle.
+                                        ClipRRect(
+                                          /*A widget that clips its child using a rounded rectangle.
                                      By default, ClipRRect uses its own bounds as the base rectangle for the clip, but the size and location of the clip can be customized using a custom clipper.*/
                                           borderRadius:
                                               BorderRadius.circular(10),
@@ -425,12 +474,29 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                           ),
-                                        )
+                                        ),
+                                        Positioned(
+                                            left: 0,
+                                            top: 0,
+                                            height: 30,
+                                            width: 80,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Colors.white,
+                                              ),
+                                              child: Center(
+                                                child: IconButton(
+                                                  icon: Icon(Icons.star_border),
+                                                  onPressed: () {},
+                                                ),
+                                              ),
+                                            ))
                                       ],
                                     ),
                                   ),
                                 );
-                                // color: Colors.red;
                               },
                             ),
                     ),
@@ -442,5 +508,42 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  addtofav(String receipename) async {
+    Map<String, dynamic> favs = {
+      "receipe name": receipename,
+    };
+
+    FirebaseFirestore.instance
+        .doc("${widget.userId}")
+        .collection("recipe names")
+        .add(favs);
+    showSnackBar("Item added to Favorites", const Duration(seconds: 2));
+  }
+
+  removeformfav(String receipename) {
+    FirebaseFirestore.instance
+        .collection('user favorite recipes')
+        .doc("${widget.userId}")
+        .get()
+        .then((value) {
+      value.reference
+          .collection("recipe names")
+          .where("receipe name", isEqualTo: receipename)
+          .get()
+          .then((value) {
+        value.docs.forEach((element) {
+          element.reference.delete();
+        });
+      });
+    });
+    showSnackBar("Item removed from Favorites", const Duration(seconds: 2));
+  }
+
+  showSnackBar(String message, Duration duration) {
+    //Shows a SnackBar across all registered Scaffolds.A scaffold can show at most one snack bar at a time. If this function is called while another snack bar is already visible, the given snack bar will be added to a queue and displayed after the earlier snack bars have closed.
+    final snackBar = SnackBar(content: Text(message), duration: duration);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
