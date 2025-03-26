@@ -58,12 +58,10 @@ Start/Run project in debug mode
 ## Authors
 
 - [@devpatel062](https://github.com/devpatel062)
-- [@manushipatel](https://github.com/manupatel20)
 
 
 ## 🚀 About Me
-Third year Science student , future Computer Engineer . My passion and interest in computer and the new technologies brought me into this field . 
-My studies have provided me with broad proficiency in the use of computer engineering methods, tools, software packages and techniques. Alongside this, I have also developed sound communication skills . As such, I am confident that I can make an instant impact in engineering roles..
+First Year Computer Science Graduate student at Indiana University- Bloomington. My passion and interest in computer and the new technologies brought me into this field . My studies have provided me with broad proficiency in the use of computer engineering methods, tools, software packages and techniques. Alongside this, I have also developed sound communication skills . As such, I am confident that I can make an instant impact in engineering roles..
 
 
 ## Lessons Learned
